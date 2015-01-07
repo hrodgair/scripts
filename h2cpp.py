@@ -111,7 +111,7 @@ cppFile = None
 cppFileExisted = os.path.isfile(path+'/'+cppFileName)
 cppFile = open(path+'/'+cppFileName, 'a')
 
-# !!! append implemented method to .cpp file
+# append implemented method to .cpp file
 finalImplementationString = ""
 if cppFileExisted == False:
     finalImplementationString = '#include \"' + headerFileName + '\"\n'
