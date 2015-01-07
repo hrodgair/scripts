@@ -95,42 +95,40 @@ path, headerFileName = os.path.split(fullPath)
 if len(path) < 1:
     path = os.getcwd()
 
-print 'Implementing ' + headerFileName
-print ''
-print 'Path: ' + path
-print 'File: ' + headerFileName
-
-# !!! check if .cpp file exists
-# !!! open it with append mode if it does, create it with r/w access otherwise
-cppFileName = headerFileName.replace('.h','.cpp')
-cppFile = None
-cppFileExists = os.path.isfile(path+'/'+cppFileName)
-if cppFileExists:
-    print '\'' + cppFileName + '\'' + ' already exists.'
-    print 'Implemented methods will be appended at the end of the existing file.'
-else:
-    print '\'' + cppFileName + '\'' + ' file was not found.  It will be created for you.'
-
-cppFile = open(path+'/'+cppFileName, 'a')
-# print cppFile
-
 # open header file
 headerFile = open(path+'/'+headerFileName, 'r')
 headerLines = headerFile.readlines()
-# print headerFile
-# print 
 
 className = getClassName(headerLines)
-print 'Class name: \'' + className +'\''
 # implment methods
 methods = getMethods(headerLines)
 implementedMethods = implementMethods(methods, className)
-print str(len(methods)) + ' methods where implemented.' 
-print ''
+
+# check if .cpp file exists
+# open it with append mode if it does, create it otherwise
+cppFileName = headerFileName.replace('.h','.cpp')
+cppFile = None
+cppFileExisted = os.path.isfile(path+'/'+cppFileName)
+cppFile = open(path+'/'+cppFileName, 'a')
+
 # !!! append implemented method to .cpp file
 finalImplementationString = ""
-if cppFileExists == False:
+if cppFileExisted == False:
     finalImplementationString = '#include \"' + headerFileName + '\"\n'
 finalImplementationString = finalImplementationString + '\n' + '\n/*\n*\n*/\n'.join(implementedMethods)
 # print finalImplementationString
 cppFile.write(finalImplementationString)
+
+# console output
+print 'Implementing ' + headerFileName
+print ''
+print 'Path: ' + path
+print 'File: ' + headerFileName
+print 'Class name: \'' + className +'\''
+if cppFileExisted:
+    print '\'' + cppFileName + '\'' + ' already exists.'
+    print 'Implemented methods will be appended at the end of the existing file.'
+else:
+    print '\'' + cppFileName + '\'' + ' file was not found.  It will be created for you.'
+print str(len(methods)) + ' methods where implemented.' 
+print ''
