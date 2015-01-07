@@ -8,6 +8,8 @@
 # - It DOES NOT CHECK if METHODS already EXIST, so they will be doubled if
 #   they're already implemented
 # - RETURN will have to be ADDED MANUALLY for methods that have return type
+# - Methods with DEFAULT ARGUMENTS will be redeclared... this is a BUG and 
+#   I'll fix is as soon as I can.  You will need to fix this manually by now
 import sys
 import os
 import re
