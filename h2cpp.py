@@ -117,7 +117,7 @@ cppFile = open(path+'/'+cppFileName, 'a')
 finalImplementationString = ""
 if cppFileExisted == False:
     finalImplementationString = '#include \"' + headerFileName + '\"\n'
-finalImplementationString = finalImplementationString + '\n' + '\n/*\n*\n*/\n'.join(implementedMethods)
+finalImplementationString = finalImplementationString + '\n' + '\n///\n'.join(implementedMethods)
 # print finalImplementationString
 cppFile.write(finalImplementationString)
 
